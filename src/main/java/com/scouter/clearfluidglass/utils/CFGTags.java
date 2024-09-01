@@ -1,5 +1,6 @@
 package com.scouter.clearfluidglass.utils;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
@@ -15,11 +16,11 @@ public class CFGTags {
 
 
         private static TagKey<Fluid> tag(String name){
-            return FluidTags.create(prefix(name));
-
+            return TagKey.create(Registries.FLUID, prefix(name));
         }
+
         private static TagKey<Fluid> forgeTag(String name){
-            return FluidTags.create(ResourceLocation.tryBuild("forge", name));
+            return TagKey.create(Registries.FLUID,  ResourceLocation.fromNamespaceAndPath("fabric", name));
 
         }
     }

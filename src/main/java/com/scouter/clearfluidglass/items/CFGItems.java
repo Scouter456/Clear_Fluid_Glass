@@ -2,20 +2,28 @@ package com.scouter.clearfluidglass.items;
 
 import com.scouter.clearfluidglass.ClearFluidGlass;
 import com.scouter.clearfluidglass.blocks.CFGBlocks;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static com.scouter.clearfluidglass.ClearFluidGlass.prefix;
 
 public class CFGItems {
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ClearFluidGlass.MODID);
-    public static final DeferredItem<BlockItem> CLEAR_FLUID_GLASS = fromBlock(CFGBlocks.CLEAR_FLUID_GLASS);
+    public static final Logger LOGGER = LoggerFactory.getLogger(ClearFluidGlass.MODID);
+
+    public static final Item CLEAR_FLUID_GLASS = registerBlockItem(CFGBlocks.CLEAR_FLUID_GLASS);
 
 
-    public static <B extends Block> DeferredItem<BlockItem> fromBlock(DeferredBlock<B> block) {
-        return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(),new Item.Properties()));
+    private static Item registerBlockItem(Block block){
+        return Registry.register(BuiltInRegistries.ITEM, prefix(block.getDescriptionId().replace("block.clearfluidglass.", "").toString()),
+                new BlockItem(block, new Item.Properties().fireResistant()));
     }
-}
+    public static void ITEMS(){
+        LOGGER.info("Registering Items for " + ClearFluidGlass.MODID);
+    }
 
+}
