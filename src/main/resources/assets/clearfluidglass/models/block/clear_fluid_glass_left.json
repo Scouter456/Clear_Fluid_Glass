@@ -1,0 +1,14 @@
+{
+  "parent": "block/cube",
+  "render_type": "cutout_mipped",
+  "textures": {
+    "particle": "clearfluidglass:block/clear_fluid_glass_all",
+    "down": "clearfluidglass:block/clear_fluid_glass_left",
+    "up": "clearfluidglass:block/clear_fluid_glass_left",
+    "north": "clearfluidglass:block/clear_fluid_glass_right",
+    "east": "clearfluidglass:block/clear_fluid_glass_blank",
+    "south": "clearfluidglass:block/clear_fluid_glass_left",
+    "west": "clearfluidglass:block/clear_fluid_glass_blank"
+  }
+}
+
