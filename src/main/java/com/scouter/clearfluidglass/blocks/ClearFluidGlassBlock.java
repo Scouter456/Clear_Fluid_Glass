@@ -1,7 +1,6 @@
 package com.scouter.clearfluidglass.blocks;
 
 import com.mojang.serialization.MapCodec;
-import com.scouter.clearfluidglass.blocks.entity.CFGBlockEntities;
 import com.scouter.clearfluidglass.blocks.entity.ClearFluidGlassBlockEntity;
 import com.scouter.clearfluidglass.utils.CFGTags;
 import net.minecraft.core.BlockPos;
@@ -14,7 +13,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -38,16 +36,11 @@ public class ClearFluidGlassBlock extends BigGlassBlockEntity {
         put(Direction.SOUTH, SHAPE_SOUTH);
         put(Direction.WEST, SHAPE_WEST);
     }};
-
-    public static final MapCodec<ClearFluidGlassBlock> CODEC = simpleCodec(ClearFluidGlassBlock::new);
     public ClearFluidGlassBlock(Properties p_53970_) {
         super(p_53970_);
     }
 
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
+
 
     @Override
     public RenderShape getRenderShape(BlockState pState) {
@@ -62,8 +55,7 @@ public class ClearFluidGlassBlock extends BigGlassBlockEntity {
             blockEntity.setOcclusionShape(Shapes.empty());
             VoxelShape shape = blockEntity.getOcclusionShape();
             for(Direction direction : Direction.values()){
-                FluidState state = pLevel.getFluidState(pPos.relative(direction));
-                if(state.is(CFGTags.Fluids.CLEAR_FLUID_GLASS_FLUIDS_TAG)){
+                if(pLevel.getFluidState(pPos.relative(direction)).is(CFGTags.Fluids.CLEAR_FLUID_GLASS_FLUIDS_TAG)){
                    shape = Shapes.or(shape, occlusionShapes.get(direction));
                    blockEntity.addDirection(direction);
                 }
@@ -72,8 +64,6 @@ public class ClearFluidGlassBlock extends BigGlassBlockEntity {
             blockEntity.setOcclusionShape(shape);
         }
         pLevel.sendBlockUpdated(pPos, pState, pState, Block.UPDATE_IMMEDIATE);
-
-
     }
 
     @Override
@@ -128,6 +118,6 @@ public class ClearFluidGlassBlock extends BigGlassBlockEntity {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return CFGBlockEntities.CLEAR_FLUID_GLASS.get().create(pPos, pState);
+        return new ClearFluidGlassBlockEntity(pPos, pState);
     }
 }

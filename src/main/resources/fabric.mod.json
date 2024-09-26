@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "clearfluidglass",
+	"version": "${version}",
+	"name": "Clear Fluid Glass",
+	"description": "This mod adds a block that allows you to see through fluids without any fog",
+	"authors": [
+		"Scouter"
+	],
+	"contact": {
+		"homepage": "https://github.com/Scouter456/Clear_Fluid_Glass",
+		"sources": "https://github.com/Scouter456/Clear_Fluid_Glass"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/clearfluidglass/clear_fluid_glass_logo.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "com.scouter.clearfluidglass.ClearFluidGlass"
+		],
+		"client": [
+			"com.scouter.clearfluidglass.setup.ClientSetup"
+		]
+	},
+	"mixins": [
+		"clearfluidglass.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.3",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
