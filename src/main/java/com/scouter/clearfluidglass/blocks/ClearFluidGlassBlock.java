@@ -1,15 +1,12 @@
 package com.scouter.clearfluidglass.blocks;
 
-import com.mojang.serialization.MapCodec;
 import com.scouter.clearfluidglass.blocks.entity.CFGBlockEntities;
 import com.scouter.clearfluidglass.blocks.entity.ClearFluidGlassBlockEntity;
 import com.scouter.clearfluidglass.utils.CFGTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -39,14 +36,8 @@ public class ClearFluidGlassBlock extends BigGlassBlockEntity {
         put(Direction.WEST, SHAPE_WEST);
     }};
 
-    public static final MapCodec<ClearFluidGlassBlock> CODEC = simpleCodec(ClearFluidGlassBlock::new);
     public ClearFluidGlassBlock(Properties p_53970_) {
         super(p_53970_);
-    }
-
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
     }
 
     @Override

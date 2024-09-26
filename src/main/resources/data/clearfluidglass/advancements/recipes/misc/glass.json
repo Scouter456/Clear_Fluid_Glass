@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "items": "clearfluidglass:clear_fluid_glass"
+            "items": [
+              "clearfluidglass:clear_fluid_glass"
+            ]
           }
         ]
       },

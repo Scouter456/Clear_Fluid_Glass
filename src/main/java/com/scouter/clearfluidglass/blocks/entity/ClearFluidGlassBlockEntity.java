@@ -44,9 +44,10 @@ public class ClearFluidGlassBlockEntity extends BlockEntity {
         super(CFGBlockEntities.CLEAR_FLUID_GLASS.get(), pPos, pBlockState);
     }
 
+
     @Override
-    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        super.saveAdditional(pTag, pRegistries);
+    protected void saveAdditional(CompoundTag pTag) {
+        super.saveAdditional(pTag);
         ListTag occlusionDirStrings = new ListTag();
         for (Direction direction : occlusionDirs) {
             CompoundTag compoundTag = new CompoundTag();
@@ -58,8 +59,8 @@ public class ClearFluidGlassBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        super.loadAdditional(pTag, pRegistries);
+    public void load(CompoundTag pTag) {
+        super.load(pTag);
         ListTag occlusionDirTag = pTag.getList("occlusiondirs", Tag.TAG_COMPOUND);
         for (int i = 0; i < occlusionDirTag.size(); i++) {
             CompoundTag dirCompoundTag = occlusionDirTag.getCompound(i);
@@ -79,8 +80,8 @@ public class ClearFluidGlassBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
-        super.handleUpdateTag(tag, lookupProvider);
+    public void handleUpdateTag(CompoundTag tag) {
+        super.handleUpdateTag(tag);
         ListTag occlusionDirTag = tag.getList("occlusiondirs", Tag.TAG_COMPOUND);
         for (int i = 0; i < occlusionDirTag.size(); i++) {
             CompoundTag dirCompoundTag = occlusionDirTag.getCompound(i);
@@ -93,7 +94,7 @@ public class ClearFluidGlassBlockEntity extends BlockEntity {
     }
 
     @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
+    public CompoundTag getUpdateTag() {
         CompoundTag compoundTag = new CompoundTag();
         ListTag occlusionDirStrings = new ListTag();
         for (Direction direction : occlusionDirs) {
@@ -106,8 +107,6 @@ public class ClearFluidGlassBlockEntity extends BlockEntity {
         return compoundTag;
     }
 
-
-
     @Nullable
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
@@ -115,8 +114,8 @@ public class ClearFluidGlassBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
-        super.onDataPacket(net, pkt, lookupProvider);
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
         ClearFluidGlassBlockEntity blockEntity = (ClearFluidGlassBlockEntity) this.level.getBlockEntity(pkt.getPos());
         CompoundTag tag = pkt.getTag();
         if(tag != null && tag.contains("occlusiondirs", 10)) {

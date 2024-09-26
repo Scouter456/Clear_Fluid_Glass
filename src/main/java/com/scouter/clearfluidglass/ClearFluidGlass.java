@@ -3,9 +3,7 @@ package com.scouter.clearfluidglass;
 import com.mojang.logging.LogUtils;
 import com.scouter.clearfluidglass.setup.Registration;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.NeoForge;
+import net.minecraftforge.fml.common.Mod;
 import org.slf4j.Logger;
 
 import java.util.Locale;
@@ -19,12 +17,12 @@ public class ClearFluidGlass
     public ClearFluidGlass()
     {
         Registration.init();
-        IEventBus forgeBus = NeoForge.EVENT_BUS;
+
 
     }
 
 
     public static ResourceLocation prefix(String name) {
-        return  ResourceLocation.fromNamespaceAndPath(MODID, name.toLowerCase(Locale.ROOT));
+        return  new ResourceLocation(MODID, name.toLowerCase(Locale.ROOT));
     }
 }
